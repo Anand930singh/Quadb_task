@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #191d28;
+    }
+
+    .dark-mode {
+        background-color: rgb(141, 138, 138);
+    }
+
+    .white-mode {
+        color: black;
+    }
+
+    .navbar_1st {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        color: rgb(255, 255, 255);
+        margin: 2.5rem 2.5rem 1.5rem 2.5rem;
+        align-items: center;
+    }
+
+
+    .site_name img {
+        height: 2.5rem;
+        width: 20rem;
+    }
+
+    .connect_tele img {
+        height: 20px;
+    }
+
+    .telegram_timer_mode {
+        display: flex;
+        flex-direction: row;
+    }
+
+
+    .currency_coin_buy {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-column-gap: 1rem;
+        color: white;
+    }
+
+    .drop_down {
+        color: white;
+
+    }
+
+    .currency_coin_buy div:last-child {
+        padding-top: 0.7em;
+    }
+    .drop_down option:not(:first-child) {
+        background-color: white;
+        color: black;
+        text-align: start;
+}
+
+
+    .currency_coin_buy select,
+    .currency_coin_buy div {
+        position: relative;
+        background-color: #2e3241;
+        padding: 0.4em 1.2em;
+        border-radius: 10px;
+        font-weight: 600;
+        text-align: center;
+        user-select: none;
+        font-size: 1em;
+        line-height: 1.5;
+        font-family: Oswald, sans-serif;
+    }
+
+    .currency_coin_buy select {
+        border: none;
+        outline: none;
+    }
+
+    /* Telegram connect button */
+    .telegram_timer_mode {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-column-gap: 1rem;
+        align-items: center;
+    }
+
+    .connect_tele {
+        margin: 10px 0;
+        padding: 6px 20px;
+        border-radius: 10px;
+        background-color: #3dc6c1;
+        color: #fff !important;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-column-gap: 0.5rem;
+        vertical-align: middle;
+        line-height: 1.5;
+        font-family: Oswald, sans-serif;
+        align-items: center;
+    }
+
+    .connect_tele div {
+        background-color: #3dc6c1;
+    }
+
+    .connect_tele img {
+        background-color: #3dc6c1;
+    }
+
+
+    /* Dark mode toggler */
+    .theme_modes {
+        vertical-align: middle;
+        margin: 10px;
+    }
+
+    .switch span {
+        background-color: #2e3241;
+    }
+
+    /* Timer */
+    .timer {
+        margin: 6px;
+        vertical-align: middle;
+    }
+
+
+    /* Toggle switch */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+
+    /* best_price_to_trade */
+
+    .best_price {
+        position: relative;
+        font-size: 1.7em;
+        color: #fff;
+        font-weight: 300;
+        font-family: Oswald, sans-serif;
+        opacity: .45;
+        text-align: center;
+        letter-spacing: .05em;
+        line-height: 1.5;
+        margin-bottom: 0.8rem;
+    }
+
+    .avg {
+        position: relative;
+        font-size: 1.2em;
+        color: #fff;
+        font-weight: 300;
+        font-family: Oswald, sans-serif;
+        opacity: .45;
+        text-align: center;
+        letter-spacing: .05em;
+        line-height: 1.5;
+        margin-top: 1rem;
+    }
+
+    /* differnet time interval stats */
+
+
+    .interval_stats {
+        width: 100%;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        align-items: center;
+        text-align: center;
+    }
+
+    .stats_center {
+        white-space: nowrap;
+        position: relative;
+        color: white;
+        font-size: 6em;
+        font-weight: 600;
+        font-family: Oswald, sans-serif;
+        /* line-height: 1.5; */
+        letter-spacing: -0.2rem;
+    }
+
+    .stats_percent {
+        position: relative;
+        font-size: 1em;
+        white-space: nowrap;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .left_interval,
+    .right_interval {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+
+
+
+    .interval_stats .stats_percent div:first-child {
+        color: #5dc7c2;
+        /* font-weight: 400; */
+        font-size: 3em;
+        text-align: center !important;
+        font-family: Oswald, sans-serif;
+        letter-spacing: -0.2rem;
+    }
+
+    .interval_stats .stats_percent div:nth-child(2) {
+        color: #fff;
+        font-weight: 400;
+        opacity: .45;
+        font-weight: 300;
+        font-size: 1.5em;
+        text-align: center !important;
+        font-family: Oswald, sans-serif;
+        line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+        border-top: 2px solid rgb(148, 146, 146);
+        /* width:100vw; */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 0.7rem;
+        color: #fff;
+        opacity: .45;
+        padding-top: 1rem;
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .footer div:first-child {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-column-gap: 1rem;
+    }
+
+    /* main table */
+    @media only screen and (max-width: 700px) {
+        .navbar_1st {
+            display: flex;
+            flex-direction: column;
+            /* flex-wrap: nowrap; */
+            justify-content: center;
+            align-items: center;
+        }
+
+        #percent {
+            font-size: 1.5em;
+            letter-spacing: 0rem;
+        }
+
+        #time {
+            font-size: 1em;
+            letter-spacing: 0rem;
+        }
+
+        #statId {
+            font-size: 3.1rem;
+        }
+
+        table th {
+            font-size: 1.2em;
+        }
+
+        table td {
+            font-size: 1em;
+            white-space: nowrap;
+        }
+
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 1em;
+        color: #fff;
+        font-family: Oswald, sans-serif;
+        text-align: center !important;
+        align-items: center;
+        font-size: 1.5em;
+        font-weight: 600;
+        line-height: 1.5;
+        padding:0 1.5rem;
+    }
+
+    table th {
+        border: none;
+        color: white;
+        opacity: 0.4;
+    }
+
+    th,
+    td {
+        padding: 0.5em;
+        /* border-bottom: 1rem solid #191d28; */
+        /* border-radius: 20px; */
+        font-size: 1.5em;
+    }
+
+    tr {
+        background-color: #2e3241;
+        margin: 1em;
+        display: table-row;
+    }
+
+    td:last-child {
+        border-radius: 0 15px 15px 0;
+    }
+
+    td:first-child {
+        border-radius: 15px 0 0 15px;
+    }
+
+
+
+    table tr:first-child {
+        background-color: #191d28;
+    }
+
+    .white-mode table {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .white-mode th {
+        color: #000;
+    }
+
+    .white-mode td {
+        color: #000;
+    }
+
+    .white-mode tr:first-child {
+        background-color: #717174;
+    }
+
+    .white-mode tr {
+        background-color: #6c6c6d;
+
+    }
+
+    .white-mode .stats_center {
+        color: #000;
+        /* Set stats center text color to black */
+    }
+
+    .white-mode .time {
+        color: #000;
+        /* Set time text color to black */
+    }
+
+    /* timer */
+    .outer_circle {
+        height: 2rem;
+        width: 2rem;
+        background-color: #5dc7c2;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .inner_circle {
+        height: 1.7rem;
+        width: 1.7rem;
+        background-color: #191d28;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* drop down */
+</style>
+
+<body>
+    <div class="navbar_1st">
+        <div class="site_name"><img src="https://hodlinfo.com/static/media/HODLINFO.8f78fc06.png"></div>
+        <div class="currency_coin_buy">
+            <div>
+                <select class="drop_down">
+                    <option value="INR">INR</option>
+                </select>
+            </div>
+            <div>
+                <select class="drop_down">
+                    <option value="INR">BTC</option>
+                    <option value="INR">ETH</option>
+                    <option value="INR">USDT</option>
+                    <option value="INR">XRP</option>
+                    <option value="INR">TRX</option>
+                    <option value="INR">DASH</option>
+                    <option value="INR">ZEC</option>
+                    <option value="INR">XEC</option>
+                    <option value="INR">XEM</option>
+                    <option value="INR">IOST</option>
+                    <option value="INR">WIN</option>
+                    <option value="INR">BTT</option>
+                    <option value="INR">WRX</option>
+                </select>
+            </div>
+            <div>BUY BTC</div>
+        </div>
+        <div class="telegram_timer_mode">
+            <div class="outer_circle">
+                <div class="inner_circle">
+                    <div class="timer" id="countdown"></div>
+                </div>
+            </div>
+            <div class="connect_tele">
+                <div><img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/768px-Telegram_logo.svg.png?20220101141644">
+                </div>
+                <div>Connect Telegram</div>
+            </div>
+            <div class="theme_modes">
+                <label class="switch">
+                    <input type="checkbox" onclick="modeToggler()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="best_price">Best Price to Trade</div>
+    <div class="interval_stats">
+        <div class="left_interval">
+            <div class="stats_percent">
+                <div id="percent">0.32 %</div>
+                <div id="time">5 Mins</div>
+            </div>
+            <div class="stats_percent">
+                <div id="percent">0.55 %</div>
+                <div id="time">1 Hours</div>
+            </div>
+        </div>
+        <div class="stats_center" id="statId"></div>
+        <div class="right_interval">
+            <div class="stats_percent">
+                <div id="percent">9.22 %</div>
+                <div id="time">1 Day</div>
+            </div>
+            <div class="stats_percent">
+                <div id="percent">14.83 %</div>
+                <div id="time">7 Days</div>
+            </div>
+        </div>
+    </div>
+    <div class="avg">Average BTC/INR net price including commission</div>
+    <div class="main">
+        <table>
+            <tr>
+                <th class="table_head">#</th>
+                <th class="table_head">Platform</th>
+                <th class="table_head">Last Traded Price</th>
+                <th class="table_head">Buy / Sell Price</th>
+                <th class="table_head">Difference</th>
+                <th class="table_head">Savings</th>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <div>
+            <div>Copyright © 2019</div>
+            <div>HodlInfo.com</div>
+        </div>
+        <div>Support</div>
+    </div>
+
+
+    <script>
+        function modeToggler() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+            var statsCenter = document.querySelector('.stats_center');
+            statsCenter.style.color = element.classList.contains("dark-mode") ? "black" : "white";
+            var time = document.querySelectorAll('.time');
+            time.forEach(function (el) {
+                el.style.color = element.classList.contains("dark-mode") ? "black" : "white";
+            });
+
+            var table = document.querySelector('table');
+            table.classList.toggle("white-mode");
+
+        }
+
+        // script.js
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/fetchData');
+                const data = await response.json();
+                const dataList = document.querySelector('table');
+                const stats = document.querySelector('.stats_center')
+
+
+                stats.textContent = `₹ ${data.avg}`;
+
+                data.reqData.forEach((item, index) => {
+                    const row = document.createElement('tr');
+
+                    const counter = document.createElement('td');
+                    counter.textContent = index + 1;
+                    row.appendChild(counter);
+
+                    const symbolCell = document.createElement('td');
+                    symbolCell.textContent = item.symbol;
+                    row.appendChild(symbolCell);
+
+                    const lastCell = document.createElement('td');
+                    lastCell.textContent = item.last;
+                    row.appendChild(lastCell);
+
+                    const buyCell = document.createElement('td');
+                    buyCell.textContent = `${item.buy} / ${item.sell}`;
+                    row.appendChild(buyCell);
+
+                    const difference = document.createElement('td');
+                    const num = (((data.avg - parseInt(item.last)) / data.avg) * 100);
+                    difference.textContent = num.toFixed(2);
+                    difference.style.color = num < 0 ? '#da5757' : '#5dc7c2'; // Apply red color for negative difference, sky blue for positive
+                    row.appendChild(difference);
+
+                    const savings = document.createElement('td');
+                    const savingsValue = data.avg - parseInt(item.last);
+                    savings.textContent = savingsValue;
+                    savings.style.color = num < 0 ? '#da5757' : '#5dc7c2'; // Apply red color for negative difference, sky blue for positive
+                    row.appendChild(savings);
+
+                    dataList.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error retrieving data:', error);
+            }
+        });
+
+
+        function startCountdown() {
+            var countdownElement = document.getElementById("countdown");
+            var count = 60;
+
+            var countdownInterval = setInterval(function () {
+                countdownElement.textContent = count;
+                count--;
+                if (count < 0) {
+                    count = 60;
+                }
+            }, 1000);
+        }
+
+        window.onload = startCountdown;
+
+    </script>
+
+</body>
+
+</html>
